@@ -7,7 +7,7 @@ namespace ps223020.DataAccess.Models
 {
     public class VideoCommentRto
     {
-        public int VideoCommentId { get; set; }
+        public int Id { get; set; }
         public string Text { get; set; }
         public DateTimeOffset DataTimeStamp { get; set; }
 

@@ -7,7 +7,7 @@ namespace ps223020.DataAccess.Models
 {
     public class VideoRto
     {
-        public int VideoId { get; set; }
+        public int Id { get; set; }
         public string ContentUrl { get; set; }
         
         public List<VideoCommentRto> VideoComments { get; set; }

@@ -8,7 +8,7 @@ namespace ps223020.DataAccess.Models
 {
     public class ProfileRto
     {
-        [Key] public int Id { get; set; }
+        public int Id { get; set; }
         public string HatImageUrl { get; set; }
 
         public int UserId { get; set; }
