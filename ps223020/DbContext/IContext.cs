@@ -15,6 +15,8 @@ namespace ps223020.DbContext
         DbSet<VideoRto> Videos { get; set; }
         DbSet<SavedVideoRto> SevedVideos { get; set; }
         DbSet<VideoCommentRto> VideoComments { get; set; }
+        DbSet<UserMultimediaPostRto> UserMultimediaPosts { get; set; }
+        DbSet<MultimediaPostCommentRto> MultimediaPostComments { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

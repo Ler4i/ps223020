@@ -9,7 +9,7 @@ using ps223020.DbContext;
 namespace ps223020.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220327131906_InitialCreate")]
+    [Migration("20220403140823_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,33 @@ namespace ps223020.Migrations
                     b.HasIndex("SecondUserId");
 
                     b.ToTable("Friends");
+                });
+
+            modelBuilder.Entity("ps223020.DataAccess.Models.MultimediaPostCommentRto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("DateTimeStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserMultimediaPostRtoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserMultimediaPostRtoId");
+
+                    b.ToTable("MultimediaPostComments");
                 });
 
             modelBuilder.Entity("ps223020.DataAccess.Models.ProfileRto", b =>
@@ -72,6 +99,28 @@ namespace ps223020.Migrations
                     b.ToTable("SevedVideos");
                 });
 
+            modelBuilder.Entity("ps223020.DataAccess.Models.UserMultimediaPostRto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("DateTimeStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserMultimediaPosts");
+                });
+
             modelBuilder.Entity("ps223020.DataAccess.Models.UserRto", b =>
                 {
                     b.Property<int>("Id")
@@ -93,13 +142,16 @@ namespace ps223020.Migrations
                     b.Property<string>("Nickname")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("PhoneNumberPrefix")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PhoneNumberPrefix")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Token")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("password")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -163,6 +215,21 @@ namespace ps223020.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ps223020.DataAccess.Models.MultimediaPostCommentRto", b =>
+                {
+                    b.HasOne("ps223020.DataAccess.Models.UserRto", "User")
+                        .WithMany("MultimediaComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ps223020.DataAccess.Models.UserMultimediaPostRto", "UserMultimediaPostRto")
+                        .WithMany("MultimediaComments")
+                        .HasForeignKey("UserMultimediaPostRtoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ps223020.DataAccess.Models.ProfileRto", b =>
                 {
                     b.HasOne("ps223020.DataAccess.Models.UserRto", "User")
@@ -184,6 +251,15 @@ namespace ps223020.Migrations
                         .WithMany("SavedVideos")
                         .HasForeignKey("VideoId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ps223020.DataAccess.Models.UserMultimediaPostRto", b =>
+                {
+                    b.HasOne("ps223020.DataAccess.Models.UserRto", "User")
+                        .WithMany("UserMultimediaPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

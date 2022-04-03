@@ -21,6 +21,8 @@ namespace ps223020.DbContext
         public DbSet<SavedVideoRto> SevedVideos { get; set; }
         public DbSet<VideoCommentRto> VideoComments { get; set; }
         public DbSet<FriendsRto> Friends { get; set; }
+        public DbSet<UserMultimediaPostRto> UserMultimediaPosts { get; set; }
+        public DbSet<MultimediaPostCommentRto> MultimediaPostComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

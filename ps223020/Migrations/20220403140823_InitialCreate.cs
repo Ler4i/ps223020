@@ -16,8 +16,9 @@ namespace ps223020.Migrations
                     Nickname = table.Column<string>(nullable: true),
                     IsBoy = table.Column<bool>(nullable: false),
                     Birthday = table.Column<DateTimeOffset>(nullable: false),
-                    PhoneNumberPrefix = table.Column<int>(nullable: false),
-                    PhoneNumber = table.Column<int>(nullable: false),
+                    PhoneNumberPrefix = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     AvatarUrl = table.Column<string>(nullable: true),
                     Token = table.Column<string>(nullable: true)
@@ -70,6 +71,27 @@ namespace ps223020.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserMultimediaPosts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DateTimeStamp = table.Column<DateTimeOffset>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMultimediaPosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserMultimediaPosts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Videos",
                 columns: table => new
                 {
@@ -85,6 +107,34 @@ namespace ps223020.Migrations
                         name: "FK_Videos_Profiles_ProfileId",
                         column: x => x.ProfileId,
                         principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MultimediaPostComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Text = table.Column<string>(nullable: true),
+                    DateTimeStamp = table.Column<DateTimeOffset>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserMultimediaPostRtoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MultimediaPostComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MultimediaPostComments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MultimediaPostComments_UserMultimediaPosts_UserMultimediaPostRtoId",
+                        column: x => x.UserMultimediaPostRtoId,
+                        principalTable: "UserMultimediaPosts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -143,6 +193,16 @@ namespace ps223020.Migrations
                 column: "SecondUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MultimediaPostComments_UserId",
+                table: "MultimediaPostComments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MultimediaPostComments_UserMultimediaPostRtoId",
+                table: "MultimediaPostComments",
+                column: "UserMultimediaPostRtoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Profiles_UserId",
                 table: "Profiles",
                 column: "UserId",
@@ -157,6 +217,11 @@ namespace ps223020.Migrations
                 name: "IX_SevedVideos_VideoId",
                 table: "SevedVideos",
                 column: "VideoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMultimediaPosts_UserId",
+                table: "UserMultimediaPosts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VideoComments_VideoId",
@@ -175,10 +240,16 @@ namespace ps223020.Migrations
                 name: "Friends");
 
             migrationBuilder.DropTable(
+                name: "MultimediaPostComments");
+
+            migrationBuilder.DropTable(
                 name: "SevedVideos");
 
             migrationBuilder.DropTable(
                 name: "VideoComments");
+
+            migrationBuilder.DropTable(
+                name: "UserMultimediaPosts");
 
             migrationBuilder.DropTable(
                 name: "Videos");
