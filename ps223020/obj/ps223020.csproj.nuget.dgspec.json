@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\StudentDev\\Documents\\GitHub\\ps223020-1\\ps223020\\ps223020.csproj": {}
+    "C:\\Users\\StudentDev\\Documents\\ps223020\\ps223020\\ps223020.csproj": {}
   },
   "projects": {
-    "C:\\Users\\StudentDev\\Documents\\GitHub\\ps223020-1\\ps223020\\ps223020.csproj": {
+    "C:\\Users\\StudentDev\\Documents\\ps223020\\ps223020\\ps223020.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\StudentDev\\Documents\\GitHub\\ps223020-1\\ps223020\\ps223020.csproj",
+        "projectUniqueName": "C:\\Users\\StudentDev\\Documents\\ps223020\\ps223020\\ps223020.csproj",
         "projectName": "ps223020",
-        "projectPath": "C:\\Users\\StudentDev\\Documents\\GitHub\\ps223020-1\\ps223020\\ps223020.csproj",
+        "projectPath": "C:\\Users\\StudentDev\\Documents\\ps223020\\ps223020\\ps223020.csproj",
         "packagesPath": "C:\\Users\\StudentDev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\StudentDev\\Documents\\GitHub\\ps223020-1\\ps223020\\obj\\",
+        "outputPath": "C:\\Users\\StudentDev\\Documents\\ps223020\\ps223020\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -30,7 +30,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -42,7 +41,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -77,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
